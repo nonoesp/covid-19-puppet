@@ -31,7 +31,7 @@ function sleep(ms) {
 
 let wait = 18000;
 let waitFirst = 3000;
-const sleepTime = 1000 * 60;
+const sleepTime = 1000 * 60 * 5;
 const filename = 'confirmed.txt';
 let previouslyConfirmed = '0';
 
@@ -84,11 +84,11 @@ console.log(`-----------------------`);
 
             fs.writeFileSync(filename, confirmed);
 
-            player.play('smb_coin.wav', function(err){
-                if (err) { 
-                    console.log(err);
-                }
-            });
+            // player.play('smb_coin.wav', function(err){
+            //     if (err) { 
+            //         console.log(err);
+            //     }
+            // });
 
             if (verbosity > 0) console.log(`Waiting for ${wait - waitFirst}ms..`);
             await page.waitFor(wait - waitFirst);
@@ -98,17 +98,17 @@ console.log(`-----------------------`);
             await page.screenshot({path: `screens/${date}_covid_${confirmed.replace(',', '.')}.png`});
 
             // Make gif
-            exec("make gif && open bin", (error, stdout, stderr) => {
-                if (error) {
-                    if (verbosity > 0) console.log(`error: ${error.message}`);
-                    return;
-                }
-                if (stderr) {
-                    if (verbosity > 0) console.log(`stderr: ${stderr}`);
-                    return;
-                }
-                if (verbosity > 0) console.log(`stdout: ${stdout}`);
-            });            
+            // exec("make gif && open bin", (error, stdout, stderr) => {
+            //     if (error) {
+            //         if (verbosity > 0) console.log(`error: ${error.message}`);
+            //         return;
+            //     }
+            //     if (stderr) {
+            //         if (verbosity > 0) console.log(`stderr: ${stderr}`);
+            //         return;
+            //     }
+            //     if (verbosity > 0) console.log(`stdout: ${stdout}`);
+            // });            
         } else {
             if (verbosity > 0) console.log(`Confirmed cases stayed the same..`);
         }
